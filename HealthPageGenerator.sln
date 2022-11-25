@@ -3,16 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HealthPageGenerator.Console", "source\HealthPageGenerator.Console\HealthPageGenerator.Console.csproj", "{9471E8ED-A233-4534-B057-40E91D1EB12A}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HealthPageGenerator", "source\HealthPageGenerator\HealthPageGenerator.csproj", "{E80E483E-D9C3-4C2A-99B4-C556B996BE77}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{DE7AF44B-0F54-4DF6-B345-93529DB68D16}"
 	ProjectSection(SolutionItems) = preProject
 		.gitattributes = .gitattributes
 		.gitignore = .gitignore
 		.github\workflows\build.yml = .github\workflows\build.yml
+		README.md = README.md
 	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HealthPageGenerator.Demo", "source\HealthPageGenerator.Demo\HealthPageGenerator.Demo.csproj", "{0C90F10A-239A-4FBC-A2EF-B3DA817FFFA2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetCore.HealthChecks.Generator", "source\AspNetCore.HealthChecks.Generator\AspNetCore.HealthChecks.Generator.csproj", "{A727EEEB-E4E0-40C7-B408-2CDB2FDA23BF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20,14 +21,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{9471E8ED-A233-4534-B057-40E91D1EB12A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9471E8ED-A233-4534-B057-40E91D1EB12A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9471E8ED-A233-4534-B057-40E91D1EB12A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9471E8ED-A233-4534-B057-40E91D1EB12A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E80E483E-D9C3-4C2A-99B4-C556B996BE77}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E80E483E-D9C3-4C2A-99B4-C556B996BE77}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E80E483E-D9C3-4C2A-99B4-C556B996BE77}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E80E483E-D9C3-4C2A-99B4-C556B996BE77}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C90F10A-239A-4FBC-A2EF-B3DA817FFFA2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C90F10A-239A-4FBC-A2EF-B3DA817FFFA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C90F10A-239A-4FBC-A2EF-B3DA817FFFA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C90F10A-239A-4FBC-A2EF-B3DA817FFFA2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A727EEEB-E4E0-40C7-B408-2CDB2FDA23BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A727EEEB-E4E0-40C7-B408-2CDB2FDA23BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A727EEEB-E4E0-40C7-B408-2CDB2FDA23BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A727EEEB-E4E0-40C7-B408-2CDB2FDA23BF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,0 +1,11 @@
+﻿name: "DemoService"
+dependencies:
+    - name: "orf-check"
+      url: "http://orf.at"
+      tags:
+       - "live"
+       - "ready"
+    - name: "google-check"
+      url: "http://google.at"
+      tags:
+       - "live"
