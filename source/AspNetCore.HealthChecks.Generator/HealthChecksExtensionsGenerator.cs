@@ -1,5 +1,6 @@
 ﻿using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Text;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,21 +22,20 @@ public class HealthChecksExtensionsGenerator : ISourceGenerator
         var healthPageDefinition = deserializer.Deserialize<HealthDefinition>(fileText);
         if (healthPageDefinition != null)
         {
-            var sourceCode =
-            @$"
-            using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+            var sourceCode = @$"
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 
-            namespace AspNetCore.HealthChecks.Generator
-            {{
-                public static class HealthChecksDefinitionFileExtensions
-                {{
-                    public static IServiceCollection AddDefinitionFileHealthChecks(this IServiceCollection source)
-                    {{
-                        {healthPageDefinition.GenerateUrlGroupCheck()}
-                        return source;
-                    }}
-                }}
-            }}";
+namespace AspNetCore.HealthChecks.Generator
+{{
+    public static class HealthChecksDefinitionFileExtensions
+    {{
+        public static IServiceCollection AddDefinitionFileHealthChecks(this IServiceCollection source)
+        {{
+            {healthPageDefinition.GenerateSourceCode()}
+            return source;
+        }}
+    }}
+}}";
 
             context.AddSource($"HealthChecksGeneratorExtensions.g.cs", SourceText.From(sourceCode, Encoding.UTF8));
         }
@@ -49,15 +49,14 @@ file class HealthDefinition
 
     public List<HealthDependency> Dependencies { get; set; } = new();
 
-    public string GenerateUrlGroupCheck()
+    public string GenerateSourceCode()
     {
         var sourceCode = new StringBuilder();
         sourceCode.AppendFormat("source.AddHealthChecks()");
+
         foreach (var dependency in Dependencies)
-            sourceCode.AppendFormat("\r\n.AddUrlGroup({0}, name: \"{1}\", tags: new string[] {{{2}}})",
-                $"new Uri(\"{dependency.Url}\")", 
-                dependency.Name,
-                string.Join(",", dependency.Tags.Select(t => $"\"{t}\"")));
+            sourceCode.Append(dependency.GenerateSourceCode());
+
         sourceCode.Append(";");
 
         return sourceCode.ToString();
@@ -68,9 +67,22 @@ file record HealthDependency
 {
     public string Name { get; set; }
 
-    public string Url { get; set; }
+    public string ConnectionString { get; set; }
 
     public List<string> Tags { get; set; } = new();
+
+    public string Type { get; set; }
+
+    public string GenerateSourceCode()
+    {
+        static string resolveTags(List<string> tags) => string.Join(",", tags.Select(t => $"\"{t}\""));
+
+        return Type.ToLowerInvariant() switch {
+            "uri" => $"\r\n\t\t\t.AddUrlGroup(new Uri(\"{ConnectionString}\"), name: \"{Name}\", tags: new string[] {{{resolveTags(Tags)}}})",
+            "sqlserver" => $"\r\n\t\t\t.AddSqlServer(\"{ConnectionString}\", name: \"{Name}\", tags: new string[] {{{resolveTags(Tags)}}})",
+            _ => throw new NotImplementedException($"SourceCode for {Type} is not implemented")
+        };
+    }
 }
 
 

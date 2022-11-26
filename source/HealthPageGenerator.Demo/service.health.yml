@@ -1,11 +1,18 @@
 ﻿name: "DemoService"
 dependencies:
-    - name: "orf-check"
-      url: "http://orf.at"
+    - name: "wiki-check"
+      connectionString: "http://en.wikipedia.org"
+      type: "uri"
       tags:
        - "live"
        - "ready"
     - name: "google-check"
-      url: "http://google.at"
+      connectionString: "http://google.at"
+      type: "uri"
+      tags:
+       - "live"
+    - name: "database-check"
+      connectionString: "Server=tcp:localhost,5433;Initial Catalog=master"
+      type: "sqlserver"
       tags:
        - "live"
