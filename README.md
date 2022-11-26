@@ -1,5 +1,8 @@
 # healthpage-generator
-# Purpose of this Project:
-- proof of concept: align health checks between services, don't want compiled by definiton file and not loaded during runtime by defintion file
-- try source generator for this approach
-- try to use yaml as definiton file, so can dependecies can be easy defined without source code knowledtge
+Proof of concept to verify aligned health checks via source code generator. Input file `.health.yml`, which is used to generate source code based on [AspNetCore.HealthChecks](https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks) libs.
+
+## Why Source Generator:
+- Defintion file (.health.yml) should not be a dependency during runtime (similar to openapi defintion files)
+
+
+
